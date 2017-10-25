@@ -5,15 +5,20 @@ args_pcs=$#
 # get arg list
 arg_list=($@)
 
+# script path n name
+MY_PATH="`dirname \"$0\"`"
+MY_NAME="`basename \"$0\"`"
+
 # ------------------- SET ARG PARSER ----------------#
 function init() {
     #__________________________!!!!!!!!!___________________________#
     ########################## SET THESE ###########################
-    known_args=("man" "debug" "example" "example2")                             # valid arg list - add new args - call with -- expl: --man
-    known_args_subs_pcs=(0 0 2 1)                                               # values for args - expl: --man -> 0, --example -> 1 etc.
+    known_args=("man" "debug" "example" "example2" "example3")                             # valid arg list - add new args - call with -- expl: --man
+    known_args_subs_pcs=(0 0 2 1 0)                                               # values for args - expl: --man -> 0, --example -> 1 etc.
     man_for_args=("--man\t\t::\tmanual"\                                        # add help text here
                   "--example\t::\texample for usage,  ${known_args_subs_pcs[2]} par"\
-                  "--example2\t::\tother example for usage, ${known_args_subs_pcs[3]} par")
+                  "--example2\t::\tother example for usage, ${known_args_subs_pcs[3]} par"\
+                  "--example3\t::\tother example for usage, ${known_args_subs_pcs[4]} par")
     #______________________________________________________________#
     ################################################################
     known_args_status=()
@@ -162,6 +167,13 @@ function demo() {
     then
         # get required arg values
         echo -e "example2 was called with parameters: ->|$(get_arg_value "example2")|<-"
+    fi
+
+    # check arg was called
+    if [ "$(get_arg_status "example3")" -eq 1 ]
+    then
+        # get required arg values
+        echo -e "example3 was called with parameters: ->|$(get_arg_value "example3")|<-"
     fi
 }
 
