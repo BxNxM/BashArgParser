@@ -1,4 +1,4 @@
-#BashArgParser
+# BashArgParser
 
 ***BASIC DEMO USAGE***
 
